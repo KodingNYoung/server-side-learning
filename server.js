@@ -1,14 +1,49 @@
 const rect = require("./rectangle");
+const circle = require("./circle");
 
 const solveRect = (l, b) => {
-  console.log("Solving for rectange with l = " + l + " and b = " + b);
-  if (l <= 0 || b <= 0) {
-    console.log("Rectangle dimensions should be greater than zero");
-  } else {
-    console.log("Area of the rectangle is: " + rect.area(l, b));
-    console.log("Perimeter of the rectangle is: " + rect.perimeter(l, b));
-  }
+  rect(l, b, (err, res) => {
+    if (err) {
+      console.log("ERROR: ", err.message);
+    } else if (res) {
+      console.log(
+        "The area of rectangle of dimensions l = " +
+          l +
+          " and b = " +
+          b +
+          " is " +
+          res.area()
+      );
+      console.log(
+        "The perimeter of rectangle of dimensions l = " +
+          l +
+          " and b = " +
+          b +
+          " is " +
+          res.perimeter()
+      );
+    }
+  });
 };
+
+const solveCircle = r => {
+  circle(r, (err, res) => {
+    if (err) {
+      console.log("Error: ", err.message);
+    } else if (res) {
+      console.log(
+        "The area of circle of radius r = " + r + " is " + res.area()
+      );
+      console.log(
+        "The perimeter of circle of radius r = " + r + " is " + res.perimeter()
+      );
+    }
+  });
+};
+
+console.log("-----------RECT-------------");
 solveRect(4, 2);
 solveRect(7, 3);
-solveRect(0, 13);
+console.log("----------CIRCLE------------");
+solveCircle(7);
+console.log("-------Async Replies--------");
