@@ -1,49 +1,19 @@
-const rect = require("./rectangle");
-const circle = require("./circle");
+const http = require("http");
 
-const solveRect = (l, b) => {
-  rect(l, b, (err, res) => {
-    if (err) {
-      console.log("ERROR: ", err.message);
-    } else if (res) {
-      console.log(
-        "The area of rectangle of dimensions l = " +
-          l +
-          " and b = " +
-          b +
-          " is " +
-          res.area()
-      );
-      console.log(
-        "The perimeter of rectangle of dimensions l = " +
-          l +
-          " and b = " +
-          b +
-          " is " +
-          res.perimeter()
-      );
-    }
-  });
-};
+// define the host variables
+const hostname = "localhost";
+const port = 3000;
 
-const solveCircle = r => {
-  circle(r, (err, res) => {
-    if (err) {
-      console.log("Error: ", err.message);
-    } else if (res) {
-      console.log(
-        "The area of circle of radius r = " + r + " is " + res.area()
-      );
-      console.log(
-        "The perimeter of circle of radius r = " + r + " is " + res.perimeter()
-      );
-    }
-  });
-};
+// creating server
+const server = http.createServer((req, res) => {
+  console.log(req.headers);
 
-console.log("-----------RECT-------------");
-solveRect(4, 2);
-solveRect(7, 3);
-console.log("----------CIRCLE------------");
-solveCircle(7);
-console.log("-------Async Replies--------");
+  res.statusCode = 200;
+  res.setHeader("Content-Type", "text/html");
+  res.end("<html><body><h1>Hello World!</h1></body></html>");
+});
+
+// start server
+server.listen(port, hostname, () => {
+  console.log(`Listening to requests at http://${hostname}:${port}`);
+});
